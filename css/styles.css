@@ -581,7 +581,8 @@
   }
   .amount:hover { background: rgba(245,241,234,0.06); }
   .amount.active { background: var(--ochre); color: var(--ink); border-color: var(--ochre); }
-  .amount-custom {
+  .amount-custom,
+  .donor-email {
     width: 100%;
     padding: 14px 16px;
     background: transparent;
@@ -590,11 +591,14 @@
     color: var(--cream);
     font-family: var(--serif);
     font-size: 16px;
-    margin-bottom: 18px;
+    margin-bottom: 12px;
     outline: none;
   }
-  .amount-custom:focus { border-color: var(--ochre); }
-  .amount-custom::placeholder { color: rgba(245,241,234,0.4); }
+  .amount-custom { margin-bottom: 18px; }
+  .amount-custom:focus,
+  .donor-email:focus { border-color: var(--ochre); }
+  .amount-custom::placeholder,
+  .donor-email::placeholder { color: rgba(245,241,234,0.4); }
   .freq-toggle {
     display: flex;
     gap: 4px;

@@ -484,8 +484,8 @@
     </div>
     <div class="donate-card">
       <div class="freq-toggle" id="freqToggle">
-        <button class="active" data-freq="Monthly" type="button">Monthly</button>
-        <button data-freq="One-time" type="button">One-time</button>
+        <button data-freq="Monthly" type="button">Monthly</button>
+        <button class="active" data-freq="One-time" type="button">One-time</button>
       </div>
       <div class="label">Choose an amount</div>
       <div class="amounts" id="amountGrid">
@@ -496,9 +496,10 @@
         <button class="amount" data-amount="₦100,000" type="button">₦100,000</button>
         <button class="amount" data-amount="₦250,000" type="button">₦250,000</button>
       </div>
-      <input class="amount-custom" id="customAmount" placeholder="Or enter custom amount (₦)" />
+      <input class="donor-email" id="donorEmail" type="email" placeholder="Email for receipt" autocomplete="email" required />
+      <input class="amount-custom" id="customAmount" inputmode="numeric" placeholder="Or enter custom amount (₦)" />
       <button class="btn-donate" id="donateBtn" type="button">
-        Give ₦15,000 monthly <span class="arrow">→</span>
+        Give ₦15,000 <span class="arrow">→</span>
       </button>
       <div class="donate-foot">Tax-deductible · secure payment · receipts emailed instantly</div>
     </div>
@@ -579,6 +580,7 @@
   </div>
 </footer>
 
+<script src="https://js.paystack.co/v1/inline.js"></script>
 <script src="js/main.js" defer></script>
 </body>
 </html>

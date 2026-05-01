@@ -1,5 +1,103 @@
 (() => {
+  const PAYSTACK_PUBLIC_KEY = 'pk_test_replace_with_your_paystack_public_key';
+  const PAYSTACK_MONTHLY_PLANS = {
+    '₦5,000': '',
+    '₦15,000': '',
+    '₦30,000': '',
+    '₦50,000': '',
+    '₦100,000': '',
+    '₦250,000': '',
+  };
   const mobileNav = document.getElementById('mobileNav');
+
+  const parseNairaAmount = (amount) => Number(String(amount).replace(/[^0-9]/g, ''));
+
+  const formatNaira = (amount) => `₦${Number(amount).toLocaleString()}`;
+
+  const makeReference = () => `ABRF-${Date.now()}-${Math.floor(Math.random() * 1000000)}`;
+
+  const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+  const getPaystackEmail = () => {
+    const emailInput = document.getElementById('donorEmail');
+
+    if (emailInput) {
+      const email = emailInput.value.trim();
+
+      if (!isValidEmail(email)) {
+        emailInput.focus();
+        alert('Please enter a valid email address for your Paystack receipt.');
+        return '';
+      }
+
+      return email;
+    }
+
+    const email = prompt('Enter your email address for your Paystack receipt:')?.trim() || '';
+    if (!isValidEmail(email)) {
+      alert('Please enter a valid email address before continuing.');
+      return '';
+    }
+
+    return email;
+  };
+
+  const startPaystackCheckout = ({ amount, email, label, frequency = 'One-time', plan = '' }) => {
+    const nairaAmount = parseNairaAmount(amount);
+
+    if (!PAYSTACK_PUBLIC_KEY || PAYSTACK_PUBLIC_KEY.includes('replace_with_your_paystack_public_key')) {
+      alert('Paystack is almost ready. Replace PAYSTACK_PUBLIC_KEY in js/main.js with your Paystack public key.');
+      return;
+    }
+
+    if (!window.PaystackPop) {
+      alert('Paystack could not load. Please check your internet connection and try again.');
+      return;
+    }
+
+    if (!nairaAmount) {
+      alert('Please choose or enter a valid donation amount.');
+      return;
+    }
+
+    if (frequency === 'Monthly' && !plan) {
+      alert('Monthly Paystack donations need a Paystack plan code. Add a plan code in js/main.js or choose One-time.');
+      return;
+    }
+
+    const config = {
+      key: PAYSTACK_PUBLIC_KEY,
+      email,
+      amount: nairaAmount * 100,
+      currency: 'NGN',
+      ref: makeReference(),
+      label: label || 'AbdulSalam Bello Raji Foundation Donation',
+      metadata: {
+        custom_fields: [
+          {
+            display_name: 'Giving Frequency',
+            variable_name: 'giving_frequency',
+            value: frequency,
+          },
+          {
+            display_name: 'Program',
+            variable_name: 'program',
+            value: label || 'General Donation',
+          },
+        ],
+      },
+      callback(response) {
+        alert(`Thank you for supporting AbdulSalam Bello Raji Foundation. Payment reference: ${response.reference}`);
+      },
+      onClose() {
+        alert('Payment window closed. You can try again whenever you are ready.');
+      },
+    };
+
+    if (plan) config.plan = plan;
+
+    window.PaystackPop.setup(config).openIframe();
+  };
 
   const openMenu = () => {
     if (!mobileNav) return;
@@ -62,7 +160,7 @@
     const digits = customAmount.value.replace(/[^0-9]/g, '');
 
     if (digits) {
-      selectedAmount = '₦' + Number(digits).toLocaleString();
+      selectedAmount = formatNaira(digits);
     } else {
       const defaultAmount = document.querySelectorAll('.amount')[1];
       selectedAmount = defaultAmount?.dataset.amount || '₦15,000';
@@ -73,7 +171,16 @@
   });
 
   donateBtn?.addEventListener('click', () => {
-    alert(`Thank you for your generosity!\n\nAmount: ${selectedAmount}\nFrequency: ${selectedFreq}\n\nYou'll be redirected to our secure payment page.`);
+    const email = getPaystackEmail();
+    if (!email) return;
+
+    startPaystackCheckout({
+      amount: selectedAmount,
+      email,
+      frequency: selectedFreq,
+      label: 'General Donation',
+      plan: selectedFreq === 'Monthly' ? PAYSTACK_MONTHLY_PLANS[selectedAmount] || '' : '',
+    });
   });
 
   document.querySelectorAll('.nl-form').forEach((form) => {
@@ -91,7 +198,16 @@
     button.addEventListener('click', () => {
       const plan = button.dataset.plan;
       const amount = button.dataset.amount;
-      alert(`Thank you for choosing the ${plan} Plan!\n\nMonthly gift: ${amount}\n\nYou'll be redirected to our secure payment page to complete your recurring gift setup.`);
+      const email = getPaystackEmail();
+      if (!email) return;
+
+      startPaystackCheckout({
+        amount,
+        email,
+        frequency: 'Monthly',
+        label: `${plan} Plan`,
+        plan: button.dataset.paystackPlan || '',
+      });
     });
   });
 
