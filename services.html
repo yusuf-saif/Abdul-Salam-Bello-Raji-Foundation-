@@ -1,0 +1,616 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Services & Programs — AbdulSalam Bello Raji Foundation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #f5f1ea;
+    --cream-2: #ede7dc;
+    --cream-3: #e3dcce;
+    --ink: #1a1814;
+    --ink-2: #4a463e;
+    --ink-3: #7a7468;
+    --green: #1f5e5a;
+    --green-deep: #0f3d3a;
+    --green-soft: #cfe0de;
+    --ochre: #c9842e;
+    --ochre-soft: #f0d9b0;
+    --rule: #d6cfc1;
+    --serif: "Newsreader", "Times New Roman", serif;
+    --sans: "DM Sans", system-ui, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--sans); background: var(--cream); color: var(--ink); line-height: 1.5; -webkit-font-smoothing: antialiased; }
+  img { display: block; max-width: 100%; }
+  a { color: inherit; text-decoration: none; }
+  button { font: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+  .container { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
+  .eyebrow { font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-3); display: inline-flex; align-items: center; gap: 10px; }
+  .eyebrow::before { content: ""; width: 24px; height: 1px; background: var(--ink-3); }
+  .display { font-family: var(--serif); font-weight: 400; letter-spacing: -0.015em; line-height: 1.05; text-wrap: balance; }
+  .display em { font-style: italic; color: var(--green); }
+  .body-lg { font-size: 18px; line-height: 1.55; color: var(--ink-2); text-wrap: pretty; max-width: 60ch; }
+  .btn { display: inline-flex; align-items: center; gap: 10px; padding: 14px 22px; border-radius: 999px; font-weight: 500; font-size: 14px; transition: transform .12s ease, background .15s ease; }
+  .btn:hover { transform: translateY(-1px); }
+  .btn-primary { background: var(--green); color: var(--cream); }
+  .btn-primary:hover { background: var(--green-deep); }
+  .btn-outline { border: 1px solid var(--ink); color: var(--ink); }
+  .btn-outline:hover { background: var(--ink); color: var(--cream); }
+  .arrow { display: inline-block; transition: transform .15s ease; }
+  .btn:hover .arrow { transform: translateX(3px); }
+
+  /* utility bar + nav */
+  .util { background: var(--green-deep); color: var(--cream); font-size: 12px; padding: 9px 0; }
+  .util .container { display: flex; justify-content: space-between; align-items: center; gap: 24px; }
+  .util-left { display: flex; gap: 18px; align-items: center; opacity: 0.85; }
+  .util-right { display: flex; gap: 18px; align-items: center; }
+  .util a:hover { color: var(--ochre-soft); }
+  .util .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--ochre); display: inline-block; }
+  nav.main { position: sticky; top: 0; z-index: 50; background: rgba(245,241,234,0.92); backdrop-filter: saturate(140%) blur(10px); border-bottom: 1px solid var(--rule); }
+  nav.main .container { display: flex; align-items: center; justify-content: space-between; padding-top: 18px; padding-bottom: 18px; gap: 32px; }
+  .brand { display: flex; align-items: center; gap: 12px; }
+  .brand-mark { width: 44px; height: 44px; flex-shrink: 0; display: grid; place-items: center; background: var(--cream); border-radius: 50%; overflow: hidden; }
+  .brand-mark img { width: 100%; height: 100%; object-fit: contain; }
+  .brand-name { font-family: var(--serif); font-size: 18px; font-weight: 500; line-height: 1.1; }
+  .brand-name span { display: block; font-family: var(--mono); font-size: 9px; letter-spacing: 0.18em; color: var(--ink-3); text-transform: uppercase; margin-top: 2px; }
+  .nav-links { display: flex; gap: 32px; align-items: center; font-size: 14px; font-weight: 500; }
+  .nav-links a { position: relative; padding: 6px 0; }
+  .nav-links a:hover { color: var(--green); }
+  .nav-links a.active::after { content: ""; position: absolute; bottom: -2px; left: 0; right: 0; height: 2px; background: var(--ochre); }
+  .menu-btn { display: none; width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--rule); align-items: center; justify-content: center; flex-direction: column; gap: 5px; }
+  .menu-btn span { display: block; width: 18px; height: 1.5px; background: var(--ink); }
+
+  /* page hero */
+  .page-hero {
+    padding: 80px 0 60px;
+    border-bottom: 1px solid var(--rule);
+    background: var(--cream-2);
+    position: relative;
+    overflow: hidden;
+  }
+  .page-hero::before {
+    content: "";
+    position: absolute;
+    top: -120px; right: -100px;
+    width: 420px; height: 420px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(31,94,90,0.08), transparent 70%);
+    pointer-events: none;
+  }
+  .page-hero .container { position: relative; }
+  .crumbs { font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 24px; }
+  .crumbs a { color: var(--ink-2); }
+  .crumbs a:hover { color: var(--green); }
+  .crumbs .sep { margin: 0 10px; opacity: 0.5; }
+  .page-hero h1 { font-size: clamp(48px, 6vw, 84px); margin: 14px 0 28px; max-width: 18ch; }
+  .page-hero p { font-size: 19px; max-width: 56ch; color: var(--ink-2); line-height: 1.55; }
+
+  /* programs detail */
+  .programs-detail { padding: 100px 0; }
+  .programs-detail .section-head {
+    display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: end;
+    margin-bottom: 64px; padding-bottom: 24px; border-bottom: 1px solid var(--rule);
+  }
+  .programs-detail h2 { font-family: var(--serif); font-size: clamp(36px, 4vw, 56px); font-weight: 400; line-height: 1.05; margin-top: 18px; max-width: 18ch; }
+  .program-row {
+    display: grid;
+    grid-template-columns: 80px 1.1fr 1fr;
+    gap: 48px;
+    padding: 56px 0;
+    border-bottom: 1px solid var(--rule);
+    align-items: start;
+  }
+  .program-row:last-child { border-bottom: none; }
+  .program-num { font-family: var(--serif); font-style: italic; font-size: 36px; color: var(--ochre); }
+  .program-row h3 { font-family: var(--serif); font-size: clamp(28px, 3vw, 40px); font-weight: 400; line-height: 1.1; margin-bottom: 18px; }
+  .program-row p { color: var(--ink-2); font-size: 16px; line-height: 1.6; margin-bottom: 18px; text-wrap: pretty; }
+  .program-row ul { list-style: none; margin-top: 16px; display: grid; gap: 10px; }
+  .program-row li { display: grid; grid-template-columns: 18px 1fr; gap: 10px; font-size: 15px; color: var(--ink-2); }
+  .program-row li::before { content: "✦"; color: var(--ochre); font-size: 12px; line-height: 1.6; }
+  .program-row .program-img {
+    aspect-ratio: 4 / 5;
+    border-radius: 4px;
+    overflow: hidden;
+    background: var(--cream-3);
+    position: relative;
+  }
+  .program-row .program-img img { width: 100%; height: 100%; object-fit: cover; }
+  .program-row .program-tag {
+    position: absolute;
+    top: 16px; left: 16px;
+    background: var(--cream);
+    color: var(--ink);
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    z-index: 2;
+  }
+
+  /* support tiers */
+  .tiers { padding: 100px 0; background: var(--cream-2); }
+  .tiers .section-head-inner {
+    display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: end;
+    margin-bottom: 56px; padding-bottom: 24px; border-bottom: 1px solid var(--rule);
+  }
+  .tiers h2 { font-family: var(--serif); font-size: clamp(36px, 4vw, 56px); font-weight: 400; line-height: 1.05; margin-top: 18px; max-width: 18ch; }
+  .tier-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .tier {
+    background: var(--cream);
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: 36px 32px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    position: relative;
+    transition: transform .2s ease, box-shadow .2s ease;
+  }
+  .tier:hover { transform: translateY(-4px); box-shadow: 0 14px 32px rgba(26,24,20,0.08); }
+  .tier.featured { background: var(--green); color: var(--cream); border-color: var(--green-deep); }
+  .tier .tier-name { font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-3); }
+  .tier.featured .tier-name { color: rgba(245,241,234,0.7); }
+  .tier .price { font-family: var(--serif); font-size: 56px; line-height: 1; letter-spacing: -0.02em; }
+  .tier .price .per { font-size: 16px; font-style: italic; color: var(--ink-3); font-family: var(--serif); margin-left: 6px; }
+  .tier.featured .price .per { color: rgba(245,241,234,0.6); }
+  .tier .summary { font-family: var(--serif); font-size: 17px; line-height: 1.4; color: var(--ink-2); padding-bottom: 18px; border-bottom: 1px solid var(--rule); }
+  .tier.featured .summary { color: rgba(245,241,234,0.85); border-color: rgba(245,241,234,0.18); }
+  .tier ul { list-style: none; display: grid; gap: 12px; margin-bottom: 8px; flex: 1; }
+  .tier li { display: grid; grid-template-columns: 18px 1fr; gap: 10px; font-size: 14px; color: var(--ink-2); line-height: 1.5; }
+  .tier.featured li { color: rgba(245,241,234,0.88); }
+  .tier li::before { content: "✓"; color: var(--green); font-weight: 700; }
+  .tier.featured li::before { color: var(--ochre); }
+  .tier .tier-cta {
+    margin-top: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 22px;
+    border-radius: 999px;
+    font-weight: 500;
+    font-size: 14px;
+    width: 100%;
+    background: var(--ink);
+    color: var(--cream);
+    transition: background .15s, transform .12s;
+    cursor: pointer;
+  }
+  .tier .tier-cta:hover { background: var(--ink-2); transform: translateY(-1px); }
+  .tier.featured .tier-cta { background: var(--ochre); color: var(--ink); }
+  .tier.featured .tier-cta:hover { background: #b87422; }
+  .tier .ribbon {
+    position: absolute;
+    top: 18px; right: 18px;
+    background: var(--ochre);
+    color: var(--ink);
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 5px 10px;
+    border-radius: 999px;
+  }
+  .tier.featured .ribbon { background: var(--cream); color: var(--green-deep); }
+  .tiers-foot { text-align: center; margin-top: 40px; color: var(--ink-3); font-size: 13px; }
+
+  /* CTA band */
+  .cta-band { padding: 100px 0; background: var(--ink); color: var(--cream); text-align: center; }
+  .cta-band h2 { font-family: var(--serif); font-size: clamp(36px, 4vw, 56px); color: var(--cream); line-height: 1.1; max-width: 22ch; margin: 0 auto 24px; }
+  .cta-band h2 em { color: var(--ochre); font-style: italic; }
+  .cta-band p { color: rgba(245,241,234,0.75); font-size: 17px; max-width: 50ch; margin: 0 auto 36px; }
+  .cta-band .actions { display: inline-flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
+  .cta-band .btn-primary { background: var(--ochre); color: var(--ink); }
+  .cta-band .btn-primary:hover { background: #b87422; }
+  .cta-band .btn-outline { border-color: rgba(245,241,234,0.4); color: var(--cream); }
+  .cta-band .btn-outline:hover { background: var(--cream); color: var(--ink); border-color: var(--cream); }
+
+  /* footer */
+  footer { background: var(--green-deep); color: var(--cream); padding: 80px 0 32px; }
+  .footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 48px; padding-bottom: 56px; border-bottom: 1px solid rgba(245,241,234,0.15); }
+  .footer-brand p { margin-top: 22px; color: rgba(245,241,234,0.7); font-size: 14px; max-width: 32ch; }
+  .footer-brand .brand-name { color: var(--cream); }
+  .footer-brand .brand-name span { color: rgba(245,241,234,0.5); }
+  .footer-col h4 { font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ochre); margin-bottom: 20px; font-weight: 500; }
+  .footer-col ul { list-style: none; display: grid; gap: 12px; }
+  .footer-col a { color: rgba(245,241,234,0.85); font-size: 14px; }
+  .footer-col a:hover { color: var(--ochre); }
+  .footer-col address { font-style: normal; color: rgba(245,241,234,0.7); font-size: 14px; line-height: 1.7; }
+  .footer-bottom { display: flex; justify-content: space-between; align-items: center; margin-top: 32px; color: rgba(245,241,234,0.55); font-size: 12px; flex-wrap: wrap; gap: 18px; }
+  .socials { display: flex; gap: 12px; }
+  .socials a { width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(245,241,234,0.2); display: grid; place-items: center; font-family: var(--serif); font-size: 14px; transition: all .15s; }
+  .socials a:hover { background: var(--ochre); color: var(--ink); border-color: var(--ochre); }
+
+  /* scroll reveal */
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity .6s ease, transform .6s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-d1 { transition-delay: 0.1s; }
+  .reveal-d2 { transition-delay: 0.2s; }
+
+  /* mobile drawer */
+  .mobile-nav { position: fixed; inset: 0; z-index: 100; background: var(--cream); display: flex; flex-direction: column; padding: 24px 32px; transform: translateX(100%); transition: transform .3s ease; }
+  .mobile-nav.open { transform: translateX(0); }
+  .mobile-nav-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; }
+  .mobile-nav-links { display: grid; gap: 4px; }
+  .mobile-nav-links a { font-family: var(--serif); font-size: 32px; padding: 12px 0; border-bottom: 1px solid var(--rule); }
+  .mobile-nav-links a:hover { color: var(--green); }
+  .close-btn { width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--rule); display: grid; place-items: center; font-size: 20px; cursor: pointer; }
+
+  @media (max-width: 980px) {
+    .program-row { grid-template-columns: 1fr; gap: 24px; padding: 40px 0; }
+    .program-num { font-size: 28px; }
+    .programs-detail .section-head { grid-template-columns: 1fr; }
+    .tiers .section-head-inner { grid-template-columns: 1fr; }
+    .tier-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .nav-links { display: none; }
+    .menu-btn { display: flex; }
+  }
+  @media (max-width: 600px) {
+    .footer-grid { grid-template-columns: 1fr; }
+    .util-right { display: none; }
+    .container { padding: 0 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- mobile drawer -->
+<nav class="mobile-nav" id="mobileNav" aria-hidden="true">
+  <div class="mobile-nav-head">
+    <a class="brand" href="index.html">
+      <span class="brand-mark"><img src="img/logo.webp" alt=""></span>
+      <span class="brand-name">ABRF<span>Foundation</span></span>
+    </a>
+    <button class="close-btn" onclick="closeMenu()" aria-label="Close">✕</button>
+  </div>
+  <div class="mobile-nav-links">
+    <a href="index.html#mission" onclick="closeMenu()">About</a>
+    <a href="services.html" onclick="closeMenu()">Services</a>
+    <a href="index.html#stories" onclick="closeMenu()">Stories</a>
+    <a href="index.html#news" onclick="closeMenu()">Updates</a>
+    <a href="index.html#involve" onclick="closeMenu()">Volunteer</a>
+    <a href="index.html#contact" onclick="closeMenu()">Contact</a>
+  </div>
+  <div style="margin-top:40px;">
+    <a href="index.html#donate" class="btn btn-primary" onclick="closeMenu()" style="width:100%; justify-content:center;">Make a Donation →</a>
+  </div>
+</nav>
+
+<div class="util">
+  <div class="container">
+    <div class="util-left">
+      <span class="dot"></span>
+      <span>Atlanta, GA · Ibadan, Oyo State, Nigeria</span>
+    </div>
+    <div class="util-right">
+      <a href="#tiers">Volunteer With Us</a>
+      <span style="opacity:0.4">·</span>
+      <a href="#">501(c)(3) Tax-Exempt</a>
+      <span style="opacity:0.4">·</span>
+      <a href="mailto:info@abdulsalambellorajifoundation.org">info@abdulsalambellorajifoundation.org</a>
+    </div>
+  </div>
+</div>
+
+<nav class="main">
+  <div class="container">
+    <a class="brand" href="index.html">
+      <span class="brand-mark"><img src="img/logo.webp" alt="AbdulSalam Bello Raji Foundation"></span>
+      <span class="brand-name">AbdulSalam Bello Raji Foundation<span>Empowering families · Atlanta · Ibadan</span></span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html">About</a>
+      <a href="services.html" class="active">Services</a>
+      <a href="index.html#stories">Stories</a>
+      <a href="index.html#news">Updates</a>
+      <a href="index.html#involve">Volunteer</a>
+      <a href="index.html#contact">Contact</a>
+    </div>
+    <div style="display:flex; gap:12px; align-items:center;">
+      <a href="index.html#donate" class="btn btn-primary">Donate <span class="arrow">→</span></a>
+      <button class="menu-btn" onclick="openMenu()" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<section class="page-hero">
+  <div class="container">
+    <div class="crumbs">
+      <a href="index.html">Home</a><span class="sep">/</span><span>Services &amp; Programs</span>
+    </div>
+    <span class="eyebrow">Programs &amp; Initiatives</span>
+    <h1 class="display">Compassionate care, <em>delivered with dignity.</em></h1>
+    <p>At the AbdulSalam Bello Raji Foundation, we are committed to improving the well-being of vulnerable individuals and families through community support, healthcare outreach, and humanitarian assistance. Our initiatives focus on addressing basic needs, promoting health, and empowering communities.</p>
+  </div>
+</section>
+
+<section class="programs-detail">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">What We Do</span>
+        <h2>Six programs working as one.</h2>
+      </div>
+      <a href="#tiers" class="btn btn-outline">Support a program <span class="arrow">→</span></a>
+    </div>
+
+    <article class="program-row reveal">
+      <div class="program-num">01</div>
+      <div>
+        <h3>Community Health Support</h3>
+        <p>We organize community-based health initiatives that help underserved populations access basic health education, screenings, and preventive care support. These programs aim to promote healthier communities and raise awareness about common health conditions.</p>
+        <ul>
+          <li>Free blood pressure, blood sugar and basic vitals screenings</li>
+          <li>One-on-one health education and lifestyle counseling</li>
+          <li>Referrals to partner clinics for follow-up care</li>
+          <li>Maternal and child health awareness sessions</li>
+        </ul>
+      </div>
+      <div class="program-img">
+        <span class="program-tag">Health</span>
+        <img src="img/health-outreach.webp" alt="Community health outreach session in Ibadan">
+      </div>
+    </article>
+
+    <article class="program-row reveal">
+      <div class="program-num">02</div>
+      <div>
+        <h3>Support for the Elderly</h3>
+        <p>The foundation provides assistance to elderly individuals who may lack access to essential care and support. Through our outreach programs, we aim to improve their well-being and ensure they receive dignity, attention, and compassionate care.</p>
+        <ul>
+          <li>Monthly food and provisions deliveries</li>
+          <li>Companion visits and social engagement programs</li>
+          <li>Coordination with healthcare providers for routine checkups</li>
+          <li>Support during religious and community festivals</li>
+        </ul>
+      </div>
+      <div class="program-img">
+        <span class="program-tag">Elderly</span>
+        <img src="img/relief-distribution.webp" alt="Volunteers distributing relief supplies to elderly community members">
+      </div>
+    </article>
+
+    <article class="program-row reveal">
+      <div class="program-num">03</div>
+      <div>
+        <h3>Education Support</h3>
+        <p>We support educational initiatives that help children from disadvantaged backgrounds continue their learning journey. This may include educational materials, scholarships, and learning support programs.</p>
+        <ul>
+          <li>School materials, uniforms and stationery distributions</li>
+          <li>Scholarship grants for primary and secondary students</li>
+          <li>After-school learning support and tutoring</li>
+          <li>Back-to-school awareness and enrollment drives</li>
+        </ul>
+      </div>
+      <div class="program-img">
+        <span class="program-tag">Education</span>
+        <img src="img/community.webp" alt="Community gathering in support of education">
+      </div>
+    </article>
+
+    <article class="program-row reveal">
+      <div class="program-num">04</div>
+      <div>
+        <h3>Quranic Scholarship Initiative</h3>
+        <p>Faith-rooted scholarships supporting students of Quranic education. We honor tradition while opening doors to broader learning, mentorship, and opportunity for promising students from low-income families.</p>
+        <ul>
+          <li>Tuition support for Quranic memorization students</li>
+          <li>Boarding, meals and learning materials</li>
+          <li>Mentorship from established teachers and scholars</li>
+          <li>Bridge programs into formal academic education</li>
+        </ul>
+      </div>
+      <div class="program-img">
+        <span class="program-tag">Faith</span>
+        <img src="img/relief-bags.webp" alt="Foundation-branded relief bags ready for distribution">
+      </div>
+    </article>
+
+    <article class="program-row reveal">
+      <div class="program-num">05</div>
+      <div>
+        <h3>Food &amp; Nutrition Outreach</h3>
+        <p>We facilitate access to essential provisions for individuals and families facing financial challenges. Community nutrition outreach delivered with care — never charity-as-spectacle.</p>
+        <ul>
+          <li>Monthly food parcels for vulnerable families</li>
+          <li>Special distributions during Ramadan and Eid</li>
+          <li>Nutrition education for mothers and caregivers</li>
+          <li>Partnerships with local food banks and farmers</li>
+        </ul>
+      </div>
+      <div class="program-img">
+        <span class="program-tag">Food</span>
+        <img src="img/registration.webp" alt="Volunteers registering beneficiaries">
+      </div>
+    </article>
+
+    <article class="program-row reveal">
+      <div class="program-num">06</div>
+      <div>
+        <h3>Volunteer &amp; Community Engagement</h3>
+        <p>Volunteers are the heart of the foundation. We welcome students, healthcare professionals, community members, and skilled volunteers in IT, media and administration — anyone passionate about helping others.</p>
+        <ul>
+          <li>Health support: outreach events, patient registration</li>
+          <li>Community outreach: nutrition programs, food drives</li>
+          <li>Education &amp; scholarship coordination</li>
+          <li>Administrative &amp; digital support: media, data, events</li>
+        </ul>
+      </div>
+      <div class="program-img">
+        <span class="program-tag">Volunteer</span>
+        <img src="img/volunteers-group.webp" alt="Group portrait of foundation volunteers">
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="tiers" id="tiers">
+  <div class="container">
+    <div class="section-head-inner">
+      <div>
+        <span class="eyebrow">Monthly Support Plans</span>
+        <h2 class="display">Choose how you want to walk with us.</h2>
+      </div>
+      <p class="body-lg" style="font-size:15px; max-width:36ch;">Recurring monthly contributions help us plan ahead — funding food deliveries, scholarships and outreach events with confidence.</p>
+    </div>
+
+    <div class="tier-grid">
+      <div class="tier reveal">
+        <span class="tier-name">Basic Plan</span>
+        <div class="price">₦1,000<span class="per">/ month</span></div>
+        <p class="summary">A heartfelt start. Every contribution carries weight in the life of someone in need.</p>
+        <ul>
+          <li>Funds one elderly food parcel each quarter</li>
+          <li>Monthly impact email with stories from the field</li>
+          <li>Tax-deductible receipt</li>
+          <li>Cancel or change anytime</li>
+        </ul>
+        <button class="tier-cta" onclick="handleTierSelect('Basic', '₦1,000')">Choose Basic <span class="arrow">→</span></button>
+      </div>
+
+      <div class="tier featured reveal reveal-d1">
+        <span class="ribbon">Most chosen</span>
+        <span class="tier-name">Standard Plan</span>
+        <div class="price">₦2,000<span class="per">/ month</span></div>
+        <p class="summary">A steady gift that funds health outreach kits, scholarship books, and weekly community meals.</p>
+        <ul>
+          <li>Sponsors one health screening per month</li>
+          <li>Quarterly written report on programs you fund</li>
+          <li>Invitation to volunteer event days in Ibadan</li>
+          <li>Personalized thank-you from the foundation team</li>
+          <li>Tax-deductible receipt</li>
+        </ul>
+        <button class="tier-cta" onclick="handleTierSelect('Standard', '₦2,000')">Choose Standard <span class="arrow">→</span></button>
+      </div>
+
+      <div class="tier reveal reveal-d2">
+        <span class="tier-name">Premium Plan</span>
+        <div class="price">₦3,000<span class="per">/ month</span></div>
+        <p class="summary">Sustaining-level support. Funds full scholarship sponsorships and emergency family relief.</p>
+        <ul>
+          <li>Co-sponsors a Quranic scholarship student</li>
+          <li>Direct line to programs team for updates</li>
+          <li>Recognition in our annual community report</li>
+          <li>Year-end impact summary tied to your giving</li>
+          <li>Tax-deductible receipt</li>
+        </ul>
+        <button class="tier-cta" onclick="handleTierSelect('Premium', '₦3,000')">Choose Premium <span class="arrow">→</span></button>
+      </div>
+    </div>
+
+    <div class="tiers-foot">
+      Prefer a one-time gift or custom amount? <a href="index.html#donate" style="color:var(--green); text-decoration:underline;">Visit our donate page →</a>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band">
+  <div class="container">
+    <span class="eyebrow" style="color:rgba(245,241,234,0.6); justify-content:center; display:inline-flex;">Get Involved</span>
+    <h2 style="margin-top:18px;">Every gift, <em>every hour</em>, every prayer matters.</h2>
+    <p>You don't need to give a lot to make a difference. Start where you are — donate, volunteer, or simply share our work with someone who cares.</p>
+    <div class="actions">
+      <a href="index.html#donate" class="btn btn-primary">Make a donation <span class="arrow">→</span></a>
+      <a href="index.html#involve" class="btn btn-outline">Sign up to volunteer</a>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="brand">
+          <span class="brand-mark"><img src="img/logo.webp" alt=""></span>
+          <span class="brand-name">AbdulSalam Bello Raji Foundation<span>Empowering families · Restoring hope</span></span>
+        </div>
+        <p>A 501(c)(3) tax-exempt nonprofit in the United States, also registered under the Corporate Affairs Commission of Nigeria. Serving humanity with care and mercy.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Programs</h4>
+        <ul>
+          <li><a href="#">Community Health</a></li>
+          <li><a href="#">Elderly Support</a></li>
+          <li><a href="#">Education Support</a></li>
+          <li><a href="#">Quranic Scholarship</a></li>
+          <li><a href="#">Food &amp; Nutrition</a></li>
+          <li><a href="#">Volunteer Outreach</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Foundation</h4>
+        <ul>
+          <li><a href="index.html">About us</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="index.html#involve">Volunteer</a></li>
+          <li><a href="index.html#donate">Donate</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Locations</h4>
+        <address>
+          <strong style="color:var(--cream); font-style:normal;">United States</strong><br>
+          Atlanta, GA 30087<br><br>
+          <strong style="color:var(--cream); font-style:normal;">Nigeria</strong><br>
+          Ibadan, Oyo State<br><br>
+          <a href="mailto:info@abdulsalambellorajifoundation.org" style="color:rgba(245,241,234,0.85);">info@abdulsalambello<br>rajifoundation.org</a>
+        </address>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 AbdulSalam Bello Raji Foundation. 501(c)(3) tax-exempt nonprofit. CAC-registered in Nigeria.</div>
+      <div class="socials">
+        <a href="#" title="Instagram">Ig</a>
+        <a href="#" title="Twitter / X">X</a>
+        <a href="#" title="LinkedIn">In</a>
+        <a href="#" title="YouTube">Yt</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function openMenu() {
+    const nav = document.getElementById('mobileNav');
+    nav.classList.add('open');
+    nav.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeMenu() {
+    const nav = document.getElementById('mobileNav');
+    nav.classList.remove('open');
+    nav.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  function handleTierSelect(plan, amount) {
+    alert(`Thank you for choosing the ${plan} Plan!\n\nMonthly gift: ${amount}\n\nYou'll be redirected to our secure payment page to complete your recurring gift setup.`);
+  }
+
+  // scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  revealEls.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
